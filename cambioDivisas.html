@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FERREMAS</title>
+  <!-- Fuente desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos globales */
+    body {
+      font-family: 'Nanum Myeongjo', serif;
+      margin: 0;
+      background-color: #2c2c2c;
+      color: white;
+      padding-top: 80px;   /* espacio para header fijo */
+      padding-bottom: 80px; /* espacio para footer fijo */
+      box-sizing: border-box;
+    }
+
+    /* Header fijo */
+    header {
+      background-color: #000;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #fff;
+    }
+
+    /* Footer fijo */
+   footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-family: 'Nanum Myeongjo', serif;
+  z-index: 1000;
+}
+
+    /* Tarjetas */
+    .card {
+      background: #3a3a3a;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      max-width: 900px;
+    }
+
+    /* Selector de divisa */
+    select {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 4px;
+      border: none;
+      font-size: 16px;
+    }
+
+    /* Botones */
+    button {
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #005a9e;
+    }
+
+    /* Contenedor de productos */
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .producto {
+      background: #fff;
+      color: #000;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 15px;
+      width: 200px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .producto img {
+  width: 100%;
+  height: auto;               
+  max-height: 200px;         
+  object-fit: contain;       
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+
+    .producto h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #0d47a1;
+    }
+
+    .producto p {
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+
+    .producto .stock {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+
+    .precio {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 10px 0;
+      color: #388e3c;
+    }
+
+    #tasa-cambio {
+      font-style: italic;
+      color: #ccc;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header fijo superior -->
+  <header>
+    <h1>FERREMAS</h1>
+  </header>
+
+  <!-- Selección de moneda -->
+  <div class="card">
+    <h2>Selecciona tu Moneda</h2>
+    <select id="divisa-selector">
+      <option value="CLP">Peso Chileno (CLP)</option>
+      <option value="USD">Dólar (USD)</option>
+      <option value="EUR">Euro (EUR)</option>
+    </select>
+    <p id="tasa-cambio">Tasa de cambio: 1 USD = $0 CLP</p>
+  </div>
+
+  <!-- Catálogo de productos -->
+  <div class="card">
+    <h2>Catálogo de Productos</h2>
+    <div class="productos" id="productos-container">
+      <!-- Productos se cargan dinámicamente -->
+    </div>
+  </div>
+
+  <!-- Footer fijo inferior -->
+  <footer>
+    <footer>
+  <p>&copy; 2025 FERREMAS. Todos los derechos reservados.</p>
+</footer>
+
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Datos de productos (precios base en CLP)
+    const productos = [
+      { id: 1, nombre: "Taladro Percutor", marca: "Bosch", precio: 79990, stock: "4", imagen: "img/taladropercutor.png", descripcion: "El Taladro percutor eléctrico Bosch GSB 13 RE es la herramienta ideal para profesionales que buscan potencia y durabilidad. Con 750W de potencia y un diseño compacto y ligero, este taladro te permitirá realizar tus trabajos con comodidad y eficiencia. Su robusta carcasa reforzada garantiza una larga vida útil, mientras que su empuñadura de goma te brindará un agarre seguro y cómodo, incluso durante largas jornadas laborales. No esperes más y adquiere el tuyo ahora mismo." },
+      { id: 2, nombre: "Taladro Atornillador Inalambrico", marca: "Bosch", precio: 55000, stock: "12", imagen: "img/taladroinalambrico.png", descripcion: "El Taladro Atornillador Inalámbrico GSR 120-LI de Bosch que es un éxito en la categoría de 12V, ahora viene con baterías de 2,0Ah! Tiene la mayor autonomía de la categoría, garantizando más productividad a tus trabajos. Es súper compacto y liviano y tiene más vida útil debido al sistema ECP que protege electrónicamente las celdas de inalámbrico. Además de esto, la herramienta es 100% compatible con baterías y cargadores Bosch de 12V. Esta versión del Taladro Atornillador Inalámbrico GSR 120-LI no incluye batería. Cuenta con 1 año de garantía Bosch." },
+      { id: 3, nombre: "Set de Brocas", marca: "Stanley", precio: 41000, stock: "8", imagen: "img/brocas.png", descripcion: "Dale vida a tus proyectos con el Juego de Brocas Stanley de 100 piezas. Esta completa colección, ideal para profesionales exigentes, te ofrece todas las herramientas que necesitas en una práctica maleta de 30 cm de largo. ¡No esperes más para comenzar tus proyectos!" },
+      { id: 4, nombre: "Foco LED Philips 10W", marca: "Philips", precio: 8900, stock: "25", imagen: "img/foco.png", descripcion: "Proyector Philips BVP150 de consumo 10W. Ideal para ser instalado en exteriores como terrazas, quinchos, talleres, estacionamientos, etc. Disponible en color negro con luz cálida. Mide 2 largo x 10 ancho x 9 alto cm." },
+      { id: 5, nombre: "Pintura Blanca Satinada 1L", marca: "Sipa", precio: 38000, stock: "3", imagen: "img/pintura.png", descripcion: "Latex Al Agua Blanco Sherwin Williams Tineta 4 Gl es la elección perfecta para quienes buscan calidad y versatilidad en sus proyectos de pintura. Este producto, de la reconocida marca SHERWIN WILLIAM, se presenta en un volumen de 4 galones, ideal para cubrir grandes superficies." }
+    ];
+
+    // Tasas de cambio (se actualizan con API)
+    let tasasCambio = { USD: 0.0011, EUR: 0.0010, CLP: 1 };
+
+    // Cargar productos en la página
+    function cargarProductos() {
+      const container = document.getElementById('productos-container');
+      container.innerHTML = '';
+      productos.forEach(producto => {
+        container.innerHTML += `
+          <div class="producto">
+    <img src="${producto.imagen}" alt="${producto.nombre}">
+    <h3>${producto.nombre}</h3>
+    <p class="marca"><strong>${producto.marca}</strong></p>
+    <p class="stock">Stock disponible: ${producto.stock}</p>
+    <p>${producto.descripcion}</p>
+    <p class="precio" data-precio-clp="${producto.precio}">$${producto.precio.toLocaleString('es-CL')} CLP</p>
+    <button onclick="comprar(${producto.id})">Agregar al carrito</button>
+  </div>
+        `;
+      });
+    }
+
+    // Actualizar precios según la moneda seleccionada
+    function actualizarPrecios() {
+      const divisa = document.getElementById('divisa-selector').value;
+      const tasa = tasasCambio[divisa];
+      document.getElementById('tasa-cambio').textContent = `Tasa de cambio: 1 ${divisa} = $${(1/tasa).toFixed(0)} CLP`;
+      document.querySelectorAll('.precio').forEach(el => {
+        const precioCLP = parseFloat(el.getAttribute('data-precio-clp'));
+        if (divisa === 'CLP') {
+          el.textContent = `$${precioCLP.toLocaleString('es-CL')} CLP`;
+        } else {
+          el.textContent = precioCLP * tasa.toLocaleString('en-US', { style: 'currency', currency: divisa });
+        }
+      });
+    }
+
+    // Simular compra
+    function comprar(id) {
+      const producto = productos.find(p => p.id === id);
+      const precioText = document.querySelector(`.producto:nth-child(${id}) .precio`).textContent;
+      alert(`✅ ¡Agregado al carrito!\n${producto.nombre}\nPrecio: ${precioText}`);
+    }
+
+    // Obtener tasas reales desde backend
+    async function obtenerTasasReales() {
+      try {
+        const resp = await fetch('http://localhost:3000/api/banco/dolar');
+        const data = await resp.json();
+        tasasCambio.USD = 1 / data.valor;
+      } catch (err) {
+        console.error('Error al obtener tasas. Usando valores por defecto.', err);
+      }
+    }
+
+    // Inicializar
+    window.onload = async () => {
+      await obtenerTasasReales();
+      cargarProductos();
+      actualizarPrecios();
+      document.getElementById('divisa-selector').addEventListener('change', actualizarPrecios);
+    };
+  </script>
+</body>
+
+</html>
