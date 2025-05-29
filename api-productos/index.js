@@ -9,18 +9,18 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Importar rutas de Webpay
+// RUTAS DEL WEBPAY
 const webpayRoutes = require('./routes/webpay');
 app.use('/api', webpayRoutes);
 
 
-// Importar rutas
+// RUTAS DE LOS PRODUCTOS
 const productosRoutes = require('./routes/productos');
-app.use('/api', productosRoutes); // 👈 esto es lo que hace que funcione la ruta
+app.use('/api', productosRoutes); // LLAMA A LA API
 
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`); 
 });
 
 const contactoRoutes = require('./routes/contactos');

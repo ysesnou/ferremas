@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// POST /api/contactos
+// LLAMA A LA API/CONTACTOS
 router.post('/contactos', async (req, res) => {
-  const { cliente_nombre, cliente_email, mensaje, vendedor_id } = req.body;
+  const { cliente_nombre, cliente_email, mensaje, vendedor_id } = req.body;   //LOS CAMPOS QUE TIENE QUE TENER EL CONTACTO EN LA TABLA
 
-  if (!cliente_nombre || !cliente_email || !mensaje || !vendedor_id) {
+  if (!cliente_nombre || !cliente_email || !mensaje || !vendedor_id) {   
     return res.status(400).json({ error: 'Faltan datos requeridos' });
   }
 
-  try {
+  try {  // SE HACE CONSULTA EN SQL CON LOS DATOS PARA MANDAR EL MENSAJE
     const sql = `
-      INSERT INTO contactos (cliente_nombre, cliente_email, mensaje, vendedor_id)
+      INSERT INTO contactos (cliente_nombre, cliente_email, mensaje, vendedor_id)       
       VALUES (?, ?, ?, ?)
     `;
     await db.query(sql, [cliente_nombre, cliente_email, mensaje, vendedor_id]);
@@ -22,11 +22,11 @@ router.post('/contactos', async (req, res) => {
   }
 });
 
-// GET /api/contactos/:vendedor_id
+// LLAMA A LA API /CONTACTOS PARA CONSULTAR EL MENSAJE, ID 1 = MENSAJE CON ID 1, ETC
 router.get('/contactos/:vendedor_id', async (req, res) => {
   const { vendedor_id } = req.params;
 
-  try {
+  try {     // SE HACE CONSULTA DE LOS MENSAJES CON LA ID DE ARRIBA
     const [rows] = await db.query(
       'SELECT * FROM contactos WHERE vendedor_id = ? ORDER BY fecha DESC',
       [vendedor_id]

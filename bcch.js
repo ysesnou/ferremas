@@ -24,7 +24,7 @@ app.get('/api/dolar', async (req, res) => {
         const valorDolar = response.data.Series.Obs[0].value;
         res.json({ valorDolar: parseFloat(valorDolar) });
     } catch (error) {
-        res.status(500).json({ error: "Error al consultar el BCCh" });
+        res.status(500).json({ error: "Error al consultar el Banco Central de Chile" });
     }
 });
 
@@ -33,7 +33,7 @@ app.get('/api/clp-to-usd', async (req, res) => {
     const { cantidad } = req.query;
 
     if (!cantidad || isNaN(cantidad)) {
-        return res.status(400).json({ error: "Ingresa una cantidad válida en CLP" });
+        return res.status(400).json({ error: "Ingresa una cantidad valida de CLP" });
     }
 
     try {
@@ -48,7 +48,7 @@ app.get('/api/clp-to-usd', async (req, res) => {
             fecha: new Date().toISOString()
         });
     } catch (error) {
-        res.status(500).json({ error: "Error en la conversión" });
+        res.status(500).json({ error: "Error en la conversion de dinero" });
     }
 });
 

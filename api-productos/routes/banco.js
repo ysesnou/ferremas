@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-// 📌 GET /api/banco/:moneda → tasa de cambio actual
+// LLAMA A LA API /BANCO, :MONEDA EJ USD CLP EUR 
 router.get('/banco/:moneda', async (req, res) => {
-  const { moneda } = req.params;
+  const { moneda } = req.params;  // LLAMA A LA MONEDA DE LA URL
 
   try {
-    const response = await axios.get(`https://mindicador.cl/api/${moneda}`);
-    const indicador = response.data.serie[0];
+    const response = await axios.get(`https://mindicador.cl/api/${moneda}`);  //LLAMA A LA API MINDICADOR.CL
+    const indicador = response.data.serie[0];  //ACCEDE AL ULTIMO VALOR DE LA MONEDA
     res.json({
       moneda: response.data.nombre,
       fecha: indicador.fecha,
@@ -19,7 +19,7 @@ router.get('/banco/:moneda', async (req, res) => {
   }
 });
 
-// 🔁 POST /api/banco/convertir → convertir monto
+// LLAMA A LA API /BANCO/CONVERTIR
 router.post('/banco/convertir', async (req, res) => {
   const { monto, moneda } = req.body;
 

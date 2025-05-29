@@ -14,7 +14,7 @@ router.get('/tipo-cambio', async (req, res) => {
       rate,
       amount,
       convertedAmount,
-      message: "¡Éxito, mi amor! 💘"
+      message: "Conversion exitosa"
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

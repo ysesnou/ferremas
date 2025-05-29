@@ -2,18 +2,16 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// 📦 Búsqueda de productos con múltiples filtros
-// Parámetros de query admitidos:
-//   id, codigo, interno, nombre, marca, categoria, stock
+
 router.get('/productos', async (req, res) => {
   const {
     id,
-    codigo,         // código_producto
-    interno,        // código_interno
+    codigo,         
+    interno,        
     nombre,
     marca,
     categoria,
-    stock           // exacto o puedes adaptar (<, <=, etc)
+    stock           
   } = req.query;
 
   let sql = `
@@ -32,43 +30,41 @@ router.get('/productos', async (req, res) => {
   `;
   const params = [];
 
-  // filtro por id exacto
+  // FILTRAR POR ID, MARCA, NOMBRE ETC
   if (id) {
     sql += ' AND p.id = ?';
     params.push(Number(id));
   }
 
-  // filtro por codigo_producto exacto
+
   if (codigo) {
     sql += ' AND p.codigo_producto = ?';
     params.push(codigo);
   }
 
-  // filtro por codigo_interno exacto
   if (interno) {
     sql += ' AND p.codigo_interno = ?';
     params.push(interno);
   }
 
-  // filtro por nombre parcial
+
   if (nombre) {
     sql += ' AND p.nombre LIKE ?';
     params.push(`%${nombre}%`);
   }
 
-  // filtro por marca parcial
   if (marca) {
     sql += ' AND p.marca LIKE ?';
     params.push(`%${marca}%`);
   }
 
-  // filtro por categoria parcial
+
   if (categoria) {
     sql += ' AND c.nombre LIKE ?';
     params.push(`%${categoria}%`);
   }
 
-  // filtro por stock exacto
+
   if (stock) {
     sql += ' AND p.stock = ?';
     params.push(Number(stock));
@@ -85,7 +81,7 @@ router.get('/productos', async (req, res) => {
   }
 });
 
-// 🔍 Ruta directa para buscar un solo producto por código (más cómoda)
+// RUTA PARA BUSCAR UN PRODUCTO SOLO POR CODIGO
 router.get('/productos/:codigo', async (req, res) => {
   const { codigo } = req.params;
 
