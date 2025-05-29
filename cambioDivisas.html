@@ -188,75 +188,138 @@
 
   <script>
     const productos = [
-      { id: 1, nombre: "Taladro Percutor", marca: "Bosch", precio: 79990, stock: "4", imagen: "img/taladropercutor.png", descripcion: "El Taladro percutor eléctrico Bosch GSB 13 RE es la herramienta ideal para profesionales que buscan potencia y durabilidad. Con 750W de potencia y un diseño compacto y ligero, este taladro te permitirá realizar tus trabajos con comodidad y eficiencia. Su robusta carcasa reforzada garantiza una larga vida útil, mientras que su empuñadura de goma te brindará un agarre seguro y cómodo, incluso durante largas jornadas laborales. No esperes más y adquiere el tuyo ahora mismo." },
-      { id: 2, nombre: "Taladro Atornillador Inalambrico", marca: "Bosch", precio: 55000, stock: "12", imagen: "img/taladroinalambrico.png", descripcion: "El Taladro Atornillador Inalámbrico GSR 120-LI de Bosch que es un éxito en la categoría de 12V, ahora viene con baterías de 2,0Ah! Tiene la mayor autonomía de la categoría, garantizando más productividad a tus trabajos. Es súper compacto y liviano y tiene más vida útil debido al sistema ECP que protege electrónicamente las celdas de inalámbrico. Además de esto, la herramienta es 100% compatible con baterías y cargadores Bosch de 12V. Esta versión del Taladro Atornillador Inalámbrico GSR 120-LI no incluye batería. Cuenta con 1 año de garantía Bosch." },
-      { id: 3, nombre: "Set de Brocas", marca: "Stanley", precio: 41000, stock: "8", imagen: "img/brocas.png", descripcion: "Dale vida a tus proyectos con el Juego de Brocas Stanley de 100 piezas. Esta completa colección, ideal para profesionales exigentes, te ofrece todas las herramientas que necesitas en una práctica maleta de 30 cm de largo. ¡No esperes más para comenzar tus proyectos!" },
-      { id: 4, nombre: "Foco LED Philips 10W", marca: "Philips", precio: 8900, stock: "25", imagen: "img/foco.png", descripcion: "Proyector Philips BVP150 de consumo 10W. Ideal para ser instalado en exteriores como terrazas, quinchos, talleres, estacionamientos, etc. Disponible en color negro con luz cálida. Mide 2 largo x 10 ancho x 9 alto cm." },
-      { id: 5, nombre: "Pintura Blanca Satinada 1L", marca: "Sipa", precio: 38000, stock: "3", imagen: "img/pintura.png", descripcion: "Latex Al Agua Blanco Sherwin Williams Tineta 4 Gl es la elección perfecta para quienes buscan calidad y versatilidad en sus proyectos de pintura. Este producto, de la reconocida marca SHERWIN WILLIAM, se presenta en un volumen de 4 galones, ideal para cubrir grandes superficies." }
+      { 
+        id: 1,
+       nombre: "Taladro Percutor",
+       marca: "Bosch", precio: 79990,
+       stock: "4", 
+       imagen: "img/taladropercutor.png",
+       descripcion: "El Taladro percutor eléctrico Bosch GSB 13 RE es la herramienta ideal para profesionales que buscan potencia y durabilidad. Con 750W de potencia y un diseño compacto y ligero, este taladro te permitirá realizar tus trabajos con comodidad y eficiencia. Su robusta carcasa reforzada garantiza una larga vida útil, mientras que su empuñadura de goma te brindará un agarre seguro y cómodo, incluso durante largas jornadas laborales. No esperes más y adquiere el tuyo ahora mismo." 
+      },
+      { 
+        id: 2,
+        nombre: "Taladro Atornillador Inalambrico", 
+        marca: "Bosch", 
+        precio: 55000, 
+        stock: "12", 
+        imagen: "img/taladroinalambrico.png", 
+        descripcion: "El Taladro Atornillador Inalámbrico GSR 120-LI de Bosch que es un éxito en la categoría de 12V, ahora viene con baterías de 2,0Ah! Tiene la mayor autonomía de la categoría, garantizando más productividad a tus trabajos. Es súper compacto y liviano y tiene más vida útil debido al sistema ECP que protege electrónicamente las celdas de inalámbrico. Además de esto, la herramienta es 100% compatible con baterías y cargadores Bosch de 12V. Esta versión del Taladro Atornillador Inalámbrico GSR 120-LI no incluye batería. Cuenta con 1 año de garantía Bosch." 
+      },
+      { 
+        id: 3, 
+        nombre: "Set de Brocas", 
+        marca: "Stanley", 
+        precio: 41000, 
+        stock: "8", 
+        imagen: "img/brocas.png", 
+        descripcion: "Dale vida a tus proyectos con el Juego de Brocas Stanley de 100 piezas. Esta completa colección, ideal para profesionales exigentes, te ofrece todas las herramientas que necesitas en una práctica maleta de 30 cm de largo. ¡No esperes más para comenzar tus proyectos!" 
+      },
+      { 
+        id: 4, 
+        nombre: "Foco LED Philips 10W", 
+        marca: "Philips", 
+        precio: 8900, 
+        stock: "25", 
+        imagen: "img/foco.png", 
+        descripcion: "Proyector Philips BVP150 de consumo 10W. Ideal para ser instalado en exteriores como terrazas, quinchos, talleres, estacionamientos, etc. Disponible en color negro con luz cálida. Mide 2 largo x 10 ancho x 9 alto cm." 
+      },
+      { 
+        id: 5, 
+        nombre: "Pintura Blanca Satinada 1L", 
+        marca: "Sipa", 
+        precio: 38000, 
+        stock: "3", 
+        imagen: "img/pintura.png", 
+        descripcion: "Latex Al Agua Blanco Sherwin Williams Tineta 4 Gl es la elección perfecta para quienes buscan calidad y versatilidad en sus proyectos de pintura. Este producto, de la reconocida marca SHERWIN WILLIAM, se presenta en un volumen de 4 galones, ideal para cubrir grandes superficies." 
+      }
     ];
 
-    let tasasCambio = { USD: 0.0011, EUR: 0.0010, CLP: 1 };
+       // Tasas de cambio (se actualizan con API)
+    let tasasCambio = {
+      USD: 0.0011,  // Valor inicial (1 CLP = 0.0011 USD)
+      EUR: 0.0010,  // Valor inicial (1 CLP = 0.0010 EUR)
+      CLP: 1
+    };
 
-    // PRODUCTOS CARGADOS EN LA PAGINA
+    // Cargar productos en la página
     function cargarProductos() {
-      const container = document.getElementById('productos-container');
+      const container = document.getElementById("productos-container");
       container.innerHTML = '';
+      
       productos.forEach(producto => {
         container.innerHTML += `
           <div class="producto">
-    <img src="${producto.imagen}" alt="${producto.nombre}">
-    <h3>${producto.nombre}</h3>
-    <p class="marca"><strong>${producto.marca}</strong></p>
-    <p class="stock">Stock disponible: ${producto.stock}</p>
-    <p>${producto.descripcion}</p>
-    <p class="precio" data-precio-clp="${producto.precio}">$${producto.precio.toLocaleString('es-CL')} CLP</p>
-    <button onclick="comprar(${producto.id})">Agregar al carrito</button>
-  </div>
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <h3>${producto.nombre}</h3>
+            <p>${producto.descripcion}</p>
+            <p class="precio" data-precio-clp="${producto.precio}">
+              $${producto.precio.toLocaleString('es-CL')} CLP
+            </p>
+            <button onclick="comprar(${producto.id})">Agregar al carrito</button>
+          </div>
         `;
       });
     }
 
-    // ACTUALIZAR PRECIOS SEGUN LA MONEDA
+    // Actualizar precios según la moneda seleccionada
     function actualizarPrecios() {
-      const divisa = document.getElementById('divisa-selector').value;
+      const selector = document.getElementById("divisa-selector");
+      const divisa = selector.value;
       const tasa = tasasCambio[divisa];
-      document.getElementById('tasa-cambio').textContent = `Tasa de cambio: 1 ${divisa} = $${(1/tasa).toFixed(0)} CLP`;
-      document.querySelectorAll('.precio').forEach(el => {
-        const precioCLP = parseFloat(el.getAttribute('data-precio-clp'));
+      
+      // Actualizar texto de tasa de cambio
+      document.getElementById("tasa-cambio").textContent = 
+        `Tasa de cambio: 1 ${divisa} = $${(1/tasa).toFixed(0)} CLP`;
+      
+      // Convertir todos los precios
+      document.querySelectorAll('.precio').forEach(elemento => {
+        const precioCLP = parseFloat(elemento.getAttribute('data-precio-clp'));
+        
         if (divisa === 'CLP') {
-          el.textContent = `$${precioCLP.toLocaleString('es-CL')} CLP`;
+          elemento.textContent = `$${precioCLP.toLocaleString('es-CL')} CLP`;
         } else {
-          el.textContent = precioCLP * tasa.toLocaleString('en-US', { style: 'currency', currency: divisa });
+          elemento.textContent = (precioCLP * tasa).toLocaleString('en-US', {
+            style: 'currency',
+            currency: divisa
+          });
         }
       });
     }
 
-    // SIMULAR LA COMPRA
-    function comprar(id) {
-      const producto = productos.find(p => p.id === id);
-      const precioText = document.querySelector(`.producto:nth-child(${id}) .precio`).textContent;
-      alert(`✅ ¡Agregado al carrito!\n${producto.nombre}\nPrecio: ${precioText}`);
+    // Simular compra
+    function comprar(idProducto) {
+      const producto = productos.find(p => p.id === idProducto);
+      const divisa = document.getElementById("divisa-selector").value;
+      const precioElement = document.querySelector(`.producto:nth-child(${idProducto}) .precio`);
+      
+      alert(`✅ ¡Agregado al carrito!\n${producto.nombre}\nPrecio: ${precioElement.textContent}`);
     }
 
-    // OBTENER LAS TASAS REALES DESDE EL BACKEND
+    // Obtener tasas de cambio reales desde API
     async function obtenerTasasReales() {
       try {
-        const resp = await fetch('http://localhost:3000/api/banco/dolar');
-        const data = await resp.json();
-        tasasCambio.USD = 1 / data.valor;
-      } catch (err) {
-        console.error('Error al obtener tasas. Usando valores por defecto.', err);
+        const response = await fetch("https://mindicador.cl/api");
+        const data = await response.json();
+        
+        // Actualizar tasas (1 CLP = X USD/EUR)
+        tasasCambio.USD = 1 / data.dolar.valor;
+        tasasCambio.EUR = 1 / data.euro.valor;
+        
+        console.log("Tasas actualizadas:", tasasCambio);
+      } catch (error) {
+        console.error("Error al obtener tasas reales. Usando valores por defecto.", error);
       }
     }
 
-    // INICIALIZAR
+    // Inicializar la página
     window.onload = async () => {
       await obtenerTasasReales();
       cargarProductos();
       actualizarPrecios();
-      document.getElementById('divisa-selector').addEventListener('change', actualizarPrecios);
+      
+      // Escuchar cambios en el selector de moneda
+      document.getElementById("divisa-selector").addEventListener("change", actualizarPrecios);
     };
   </script>
 </body>
-
 </html>
